@@ -1,4 +1,11 @@
-У каждой функции-конструктора есть свойство prototype, значение котрого представляет собой объект со свойством [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor). Это свойство указывает на определение исходной функции-конструктора.
+## Сводка
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor
+
+У каждой функции-конструктора есть свойство `prototype`, значение котрого представляет собой объект со свойством `constructor`.
+
+`constructor` возвращает ссылку на определение исходной функции-конструктора.
+
 
 ```js
 function Person(first, last, age, gender, interests) {
