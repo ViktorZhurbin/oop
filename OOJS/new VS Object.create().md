@@ -45,3 +45,6 @@ var d = Object.create(null);
 console.log(d.hasOwnProperty);
 // undefined, т.к. 'd' не наследуется от Object.prototype
 ```
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE4MTYyMjM2NzBdfQ==
+-->
