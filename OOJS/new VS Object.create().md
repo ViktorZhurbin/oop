@@ -2,8 +2,15 @@ https://stackoverflow.com/a/13041474/4819463
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
 
+---
+### Различие
 
-### Конструктор
+`Object.create()` - метод создания объектов
+
+Оператор `new` - метод вызова функции-конструктора
+
+---
+### `new`
 
 В JavaScript конструктор — это просто функция. Единственным отличием конструктора от обычной функции является способ вызова с оператором `new`.
 

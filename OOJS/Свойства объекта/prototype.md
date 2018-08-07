@@ -1,60 +1,83 @@
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype
+
 https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9
+
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes
 
 ## prototype
 
-(https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)
+Почти все объекты в JS являются экземплярами `Object` и наследуют методы и свойства `Object.prototype`.
 
-Все объекты наследуют методы и свойства из прототипа объекта Object.prototype, хотя они и могут быть переопределены (исключение: Object.create(null) - Object с прототипом null).
+Исключение:
+```js
+// Object с прототипом null
+var o = Object.create(null);
+```
 
-Например, прототипы других конструкторов переопределяют свойство constructor и предоставляют свои собственные методы toString().
+Методы и свойства могут быть переопределены. Например, прототипы других конструкторов переопределяют свойство `constructor`.
 
-Изменения в объекте прототипа Object распространяются на все объекты до тех пор, пока свойства и методы, учитывающие эти изменения, не переопределяются дальше по цепочке прототипов.
+Изменения в объекте прототипа `Object` распространяются на все объекты до тех пор, пока свойства и методы, учитывающие эти изменения, не переопределяются дальше по цепочке прототипов. Это мощный (но потенциально опасный) механизм, который позволяет переопределять и расширять поведение объекта.
 
-В JS, строго говоря, нет объектов подклассов. Поэтому прототип является "обходным путём" для создания объекта "базового класса" из определённых функций, которые выступают в роли объектов. Например:
+В JS, строго говоря, нет объектов подклассов. Поэтому прототип является удобным "обходным путём" для создания объекта "базового класса" из определённых функций, которые выступают в роли объектов. Например:
 
 ```js
 var Person = function(name) {
-    this.name = name;
-    this.canTalk = true;
-    this.greet = function() {
-        if (this.canTalk) {
-            console.log('Привет, я ' + this.name);
-        }
-    };
+  this.name = name;
+  this.canTalk = true;
+};
+
+Person.prototype.greet = function() {
+  if (this.canTalk) {
+    console.log('Hi, I am ' + this.name);
+  }
 };
 
 var Employee = function(name, title) {
-    this.name = name;
-    this.title = title;
-    this.greet = function() {
-        if (this.canTalk) {
-            console.log('Привет, я ' + this.name + ', ' + this.title);
-        }
-    };
+  Person.call(this, name);
+  this.title = title;
 };
-Employee.prototype = new Person();
+
+Employee.prototype = Object.create(Person.prototype);
+
+Employee.prototype.greet = function() {
+  if (this.canTalk) {
+    console.log('Hi, I am ' + this.name + ', the ' + this.title);
+  }
+};
 
 var Customer = function(name) {
-    this.name = name;
+  Person.call(this, name);
 };
-Customer.prototype = new Person();
+
+Customer.prototype = Object.create(Person.prototype);
 
 var Mime = function(name) {
-    this.name = name;
-    this.canTalk = false;
+  Person.call(this, name);
+  this.canTalk = false;
 };
-Mime.prototype = new Person();
 
-var bob = new Employee('Боб', 'Строитель');
-var joe = new Customer('Джо');
-var rg = new Employee('Ред Грин', 'Разнорабочий');
-var mike = new Customer('Майк');
-var mime = new Mime('Мим');
+Mime.prototype = Object.create(Person.prototype);
+
+var bob = new Employee('Bob', 'Builder');
+var joe = new Customer('Joe');
+var rg = new Employee('Red Green', 'Handyman');
+var mike = new Customer('Mike');
+var mime = new Mime('Mime');
+
 bob.greet();
+// Hi, I am Bob, the Builder
+
 joe.greet();
+// Hi, I am Joe
+
 rg.greet();
+// Hi, I am Red Green, the Handyman
+
 mike.greet();
+// Hi, I am Mike
+
 mime.greet();
+
 ```
 
 
