@@ -69,8 +69,17 @@ git checkout <previous_commit_sha>
 git checkout -b new_branch_without_crazy_commit
 ```
 
+### Revert
+
 ```bash
 # Создаст новый коммит, в котором не будет изменений из указанного коммита
 git revert <sha>
 ```
 
+### Interactive rebase
+
+```bash
+# Показать последние n коммитов ветки
+$ git rebase -i HEAD~3
+git rebase -i <sha>
+```
