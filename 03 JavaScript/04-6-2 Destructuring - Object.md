@@ -137,3 +137,12 @@ let { [key]: foo } = { z: "bar" };
 
 console.log(foo); // "bar"
 ```
+
+### Rest
+
+```js
+let {a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40}
+a; // 10
+b; // 20
+rest; // { c: 30, d: 40 }
+```

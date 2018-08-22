@@ -1,15 +1,34 @@
-Синтаксис расширения позволяет расширять массивы или строки там, где ожидается ноль и более аргументов (при вызовах функции) или элементов (для массивов), или объекты там, где ожидается ноль и более пар ключ-значение.
+## Синтаксис расширения
 
+`spread` 'раскрывает' массив - получаем несколько переменных из одной.
+```js
+var params = [ "hello", true, 7 ];
+var other = [ 1, 2, ...params ]; // other => [1,2,"hello", true, 7]
 
-For function calls:
-`myFunction(...iterableObj);`
+// Here, ...params spreads so as to assing all of its elements to other
+// Internally javaScript does following:
+var other = [1, 2].concat(params);
+```
 
-For array literals or strings:
-`[...iterableObj, '4', 'five', 6];`
+ ```js
+var abc = ['a', 'b', 'c'];
+var def = ['d', 'e', 'f'];
+var alpha = [ ...abc, ...def ];
+console.log(alpha)// alpha == ['a', 'b', 'c', 'd', 'e', 'f'];
+```
 
-For object literals (new in ECMAScript 2018):
-`let objClone = { ...obj };`
+Spread позволяет расширять массивы или строки там, где ожидается ноль и более аргументов (при вызовах функции) или элементов (для массивов), или объекты там, где ожидается ноль и более пар ключ-значение.
 
+```js
+// function calls
+myFunction(...iterableObj);
+
+// array literals or strings
+[...iterableObj, '4', 'five', 6];
+
+// object literals (new in ECMAScript 2018)
+let objClone = { ...obj };
+```
 
 ### Функция
 
