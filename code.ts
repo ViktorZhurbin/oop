@@ -1,3 +1,13 @@
+interface Named {
+  name: string;
+}
+
+let x: Named;
+// выведенный тип для y — { name: string; location: string; }
+let y = { name: "Alice", location: "Seattle" };
+x = y;
+
+
 class Cat {
   eat() {}
   drink() {}
