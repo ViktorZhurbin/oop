@@ -1,11 +1,10 @@
-interface Named {
-  name: string;
-}
+window.onmousedown = function (mouseEvent) {
+  console.log(mouseEvent.button);  //<- Error
+};
 
-let x: Named;
-// выведенный тип для y — { name: string; location: string; }
-let y = { name: "Alice", location: "Seattle" };
-x = y;
+window.onmousedown = function (mouseEvent: any) {
+  console.log(mouseEvent.button);  //<- Now, no error is given
+};
 
 
 class Cat {
